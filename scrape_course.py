@@ -109,6 +109,10 @@ def start(old_open_seats_dict,old_closed_seats_dict):
     
     now_opened=open_seats_dict-old_open_seats_dict
     
+    for course_num in now_opened :
+        print(df[df['class_N']==course_num])
+        
+    
     print(now_opened,"opened justnow")
     
     
@@ -137,15 +141,17 @@ def check() :
 check()
     
 
+
+
+
    
 #find_by_class_url=https://webapp4.asu.edu/catalog/myclasslistresults?t=2217&hon=F&promod=F&e=all&k=76277    
-    
-    
-    
-    
-    
-    
 
+    
+    
+    
+    
+#https://webapp4.asu.edu/catalog/myclasslistresults?t=2217&s=CSE&hon=F&promod=F&e=all&page=1
     
     
     

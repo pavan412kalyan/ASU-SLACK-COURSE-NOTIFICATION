@@ -114,14 +114,26 @@ def start(old_open_seats_dict,old_closed_seats_dict):
     
     now_opened=open_seats_dict-old_open_seats_dict
     
-    print(now_opened,"opened justnow")
+    #print(now_opened,"opened justnow")
     if len(now_opened) > 0 :
-      client.chat_postMessage(channel='#course-asu-bot',text='Courses'+ str(now_opened) + "  is now opened")
+      msg = ""
+      for course_num in now_opened :
+        msg = msg + "  \n" + str(df[df['class_N']==course_num])
+      client.chat_postMessage(channel='#course-asu-bot',text='Courses'+ msg + "  is now opened")
+
+
 
     
     now_closed=closed_seats_dict-old_closed_seats_dict
-    print(now_closed,"closed justnow")
-    
+    #print(now_closed,"closed justnow")
+
+    if len(now_closed) > 0 :
+      msg = ""
+      for course_num in now_closed :
+        msg = msg + "  \n" + str(df[df['class_N']==course_num])
+      client.chat_postMessage(channel='#course-asu-bot',text='Courses'+ msg + "  is now closed")
+
+
     
     old_open_seats_dict=open_seats_dict
     old_closed_seats_dict=closed_seats_dict
@@ -144,21 +156,5 @@ def check() :
 check()
     
 
-
-
-
    
 #find_by_class_url=https://webapp4.asu.edu/catalog/myclasslistresults?t=2217&hon=F&promod=F&e=all&k=76277    
-
-    
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
