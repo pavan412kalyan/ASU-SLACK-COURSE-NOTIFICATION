@@ -61,7 +61,7 @@ def scrape(url,all_pages) :
 
  
 def start_scrape(all_pages) :     
-    url="https://webapp4.asu.edu/catalog/myclasslistresults?t=2217&hon=F&promod=F&e=all&s=cse&page=1"
+    url="https://webapp4.asu.edu/catalog/myclasslistresults?t=2221&hon=F&promod=F&e=all&s=cse&page=1"
     r = requests.get(url)
     soup = BeautifulSoup(r.text, 'html.parser')
     process_page = Thread(target=scrape, args=[url,all_pages])
@@ -70,7 +70,7 @@ def start_scrape(all_pages) :
         last_page = soup.find('ul',{'class':'pagination'}).findAll('a',{'class':'change-page'})[-1].text
 #        last_page=3
         for i in range(2,int(last_page)+1) :
-            url="https://webapp4.asu.edu/catalog/myclasslistresults?t=2217&hon=F&promod=F&e=all&s=cse&page=" + str(i)
+            url="https://webapp4.asu.edu/catalog/myclasslistresults?t=2221&hon=F&promod=F&e=all&s=cse&page=" + str(i)
             process_page = Thread(target=scrape, args=[url,all_pages])
             process_page.start()
             process_page.join()
@@ -135,8 +135,11 @@ def start(old_open_seats_dict,old_closed_seats_dict):
 def check() :
      old_open_seats_dict= set()
      old_closed_seats_dict=set()
-     start(old_open_seats_dict,old_closed_seats_dict)
-
+     try :
+         start(old_open_seats_dict,old_closed_seats_dict)
+     except :
+         check()
+     
 
 check()
     
